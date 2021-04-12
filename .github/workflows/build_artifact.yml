@@ -1,0 +1,14 @@
+name: Build artifact
+
+on:
+  event:
+    types: [published]
+
+jobs:
+  build_artifact:
+    name: Build artifact
+    runs-on: ubuntu-latest
+    steps:
+    - name: Echo information
+      run: |
+        echo GITHUB_SHA: $GITHUB_SHA, GITHUB_REF: $GITHUB_REF
