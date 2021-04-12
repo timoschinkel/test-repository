@@ -14,4 +14,9 @@ jobs:
         echo GITHUB_SHA: $GITHUB_SHA, GITHUB_REF: $GITHUB_REF, running on branch ${GITHUB_REF##*/}
     - name: Retrieve release
       run: |
-        curl -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -H 'Accept: application/vnd.github.v3+json' -v https://api.github.com/repos/timoschinkel/test-repository/releases/tags/${GITHUB_REF##*/}
+        curl -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+        -H 'Accept: application/vnd.github.v3+json' \
+        --fail \
+        https://api.github.com/repos/timoschinkel/test-repository/releases/tags/${GITHUB_REF##*/} > release.json
+    - name: Parse upload url
+      run: cat release.json
