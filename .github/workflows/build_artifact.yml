@@ -9,6 +9,7 @@ jobs:
     name: Build artifact
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
     - name: Echo information
       run: |
         echo GITHUB_SHA: $GITHUB_SHA, GITHUB_REF: $GITHUB_REF, running on branch ${GITHUB_REF##*/}
