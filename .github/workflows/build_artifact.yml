@@ -1,7 +1,7 @@
 name: Build artifact
 
 on:
-  event:
+  release:
     types: [published]
 
 jobs:
