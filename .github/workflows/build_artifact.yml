@@ -17,6 +17,18 @@ jobs:
         curl -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
         -H 'Accept: application/vnd.github.v3+json' \
         --fail \
-        https://api.github.com/repos/timoschinkel/test-repository/releases/tags/${GITHUB_REF##*/} > release.json
+        https://api.github.com/repos/timoschinkel/test-repository/releases/tags/${GITHUB_REF##*/} > release.json    
     - name: Parse upload url
-      run: cat release.json
+      id: release
+      run: |
+        url=`cat release.json | grep upload_url | sed 's/[[:space:]]*"upload_url":[[:space:]]*"\(.[^{"]*\).*/\1/'`
+        echo "::set-output name=url::$url"
+    - name: Create artifact
+      run: zip ${GITHUB_REF##*/}.zip README.md
+    - name: Upload
+      run: |
+        curl -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+        -H 'Content-Type: application/octet-stream'
+        --data-binary @"${GITHUB_REF##*/}.zip"
+        --fail
+        ${{ steps.release.outputs.url }}?name=${GITHUB_REF##*/}.zip
