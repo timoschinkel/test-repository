@@ -12,6 +12,8 @@ jobs:
     - name: Echo information
       run: |
         echo GITHUB_SHA: $GITHUB_SHA, GITHUB_REF: $GITHUB_REF, running on branch ${GITHUB_REF##*/}
+        echo `pwd`
+        ls -l
     - name: Retrieve release
       run: |
         curl -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
