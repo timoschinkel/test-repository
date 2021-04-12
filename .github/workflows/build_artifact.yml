@@ -12,3 +12,6 @@ jobs:
     - name: Echo information
       run: |
         echo GITHUB_SHA: $GITHUB_SHA, GITHUB_REF: $GITHUB_REF
+    - name: Retrieve release
+      run: |
+        curl -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -H 'Accept: application/vnd.github.v3+json' https://api.github.com/repos/timoschinkel/test-repository/releases/tags/$GITHUB_REF
