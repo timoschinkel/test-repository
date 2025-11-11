@@ -1,5 +1,3 @@
 # Test repository
 
-We all need to test things every now and than. This is my playground!
-
-Oh nee, toch niet! Behalve jij!
+We all need to test things every now and than. This is my playground!!
